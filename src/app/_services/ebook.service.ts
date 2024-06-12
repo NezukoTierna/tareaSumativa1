@@ -13,7 +13,7 @@ export class EbookService {
   constructor(private http: HttpClient) {}
 
   getEbooks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/ebooks`);
+    return this.http.get<any[]>(`${this.baseUrl}/ebook`);
   }
 
   createEbook(ebook: CreateEbook): Observable<Object> {
