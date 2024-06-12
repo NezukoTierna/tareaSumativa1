@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { EbookService } from 'src/app/_services/ebook.service';
 
 @Component({
   selector: 'app-ebook-list',
@@ -6,6 +9,19 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class EbookListComponent {
+export class EbookListComponent implements OnInit {
 
+  ebooks: any[] = [];
+
+  constructor(private ebookService: EbookService) { }
+
+  ngOnInit(): void {
+    this.loadEbooks();
+  }
+
+  loadEbooks(): void {
+    this.ebookService.getEbooks().subscribe(data => {
+      this.ebooks = data;
+    });
+  }
 }

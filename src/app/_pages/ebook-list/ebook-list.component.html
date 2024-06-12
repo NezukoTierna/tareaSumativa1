@@ -1,1 +1,11 @@
 <p>ebook-list works!</p>
+<div *ngIf="ebooks.length > 0">
+  <ul>
+    <li *ngFor="let ebook of ebooks">
+      {{ ebook.title }} - {{ ebook.author }}
+    </li>
+  </ul>
+</div>
+<div *ngIf="ebooks.length === 0">
+  No ebooks found.
+</div>

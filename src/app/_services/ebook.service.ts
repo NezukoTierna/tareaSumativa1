@@ -12,6 +12,10 @@ export class EbookService {
 
   constructor(private http: HttpClient) {}
 
+  getEbooks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/ebooks`);
+  }
+
   createEbook(ebook: CreateEbook): Observable<Object> {
     return this.http.post(`${this.baseUrl}/ebooks`, ebook);
   }
