@@ -32,4 +32,14 @@ export class EbookListComponent implements OnInit {
   navigateToCreate(): void {
     this.router.navigate(['/create']);
   }
+
+  navigateToEdit(id: number): void {
+    this.router.navigate(['/edit', id]);
+  }
+
+  deleteEbook(id: number): void {
+    this.ebookService.deleteEbook(id).subscribe(() => {
+      this.loadEbooks(); // Recargar la lista después de eliminar un eBook
+    });
+  }
 }

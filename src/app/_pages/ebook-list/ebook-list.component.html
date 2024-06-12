@@ -3,6 +3,8 @@
   <ul>
     <li *ngFor="let ebook of ebooks">
       {{ ebook.title }} - {{ ebook.author }}
+      <button type="button" class="btn btn-secondary" (click)="navigateToEdit(ebook.id)">Edit</button>
+      <button type="button" class="btn btn-danger" (click)="deleteEbook(ebook.id)">Delete</button>
     </li>
   </ul>
 </div>
@@ -10,4 +12,4 @@
   No ebooks found.
 </div>
 
-<button (click)="navigateToCreate()">Create New Ebook</button>
+<button type="button" class="btn btn-primary" (click)="navigateToCreate()">Create New Ebook</button>

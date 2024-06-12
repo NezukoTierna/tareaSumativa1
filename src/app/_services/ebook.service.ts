@@ -19,4 +19,8 @@ export class EbookService {
   createEbook(ebook: CreateEbook): Observable<Object> {
     return this.http.post(`${this.baseUrl}/ebooks`, ebook);
   }
+
+  deleteEbook(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/ebooks/${id}`);
+  }
 }
