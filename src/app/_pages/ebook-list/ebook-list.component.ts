@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { Ebook } from 'src/app/_interfaces/ebook';
 import { EbookService } from 'src/app/_services/ebook.service';
 
 @Component({
@@ -13,6 +14,10 @@ import { EbookService } from 'src/app/_services/ebook.service';
 export class EbookListComponent implements OnInit {
 
   ebooks: any[] = [];
+  filteredEbooks: Ebook[] = [];
+  searchTerm: string = '';
+  selectedGenre: string = '';
+  genres: string[] = [];
 
   constructor(private ebookService: EbookService, private router: Router) { }
 
@@ -21,12 +26,29 @@ export class EbookListComponent implements OnInit {
   }
 
   //esto hace el llamado a la API obteniendo el data, pero ojo, los CORS deben ser habilitados
-  loadEbooks(): void {
-    this.ebookService.getEbooks().subscribe(data => {
-      console.log(data);
-      this.ebooks = data;
-    });
+  loadEbooks() {
+    this.ebookService.getEbooks().subscribe(
+      (data: Ebook[]) => {
+        this.ebooks = data;
+        this.filteredEbooks = data;
+        this.extractGenres();
+      },
+      error => {
+        console.error('Error fetching ebooks', error);
+      }
+    );
+  }
 
+  extractGenres() {
+    this.genres = Array.from(new Set(this.ebooks.map(ebook => ebook.genre)));
+  }
+
+  filterEbooks() {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredEbooks = this.ebooks.filter(ebook =>
+      (ebook.title.toLowerCase().includes(term) || ebook.author.toLowerCase().includes(term)) &&
+      (this.selectedGenre === '' || ebook.genre === this.selectedGenre)
+    );
   }
 
   navigateToCreate(): void {

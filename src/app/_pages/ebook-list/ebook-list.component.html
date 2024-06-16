@@ -1,14 +1,30 @@
+<!-- Search input for title or author -->
+<input
+  type="text"
+  class="form-control"
+  placeholder="Search by title or author"
+  [(ngModel)]="searchTerm"
+  (input)="filterEbooks()"
+  style="margin-bottom: 10px;"
+>
+
+<!-- Dropdown for genre filter -->
+<select class="form-control" [(ngModel)]="selectedGenre" (change)="filterEbooks()" style="margin-bottom: 10px;">
+  <option value="">All Genres</option>
+  <option *ngFor="let genre of genres">{{ genre }}</option>
+</select>
+
 <p>ebook-list works!</p>
-<div *ngIf="ebooks.length > 0">
+<div *ngIf="filteredEbooks.length > 0">
   <ul>
-    <li *ngFor="let ebook of ebooks">
-      {{ ebook.title }} - {{ ebook.author }}
+    <li *ngFor="let ebook of filteredEbooks">
+      {{ ebook.title }} - {{ ebook.author }} - {{ ebook.genre }}
       <button type="button" class="btn btn-secondary" (click)="navigateToEdit(ebook.id)">Edit</button>
       <button type="button" class="btn btn-danger" (click)="deleteEbook(ebook.id)">Delete</button>
     </li>
   </ul>
 </div>
-<div *ngIf="ebooks.length === 0">
+<div *ngIf="filteredEbooks.length === 0">
   No ebooks found.
 </div>
 
