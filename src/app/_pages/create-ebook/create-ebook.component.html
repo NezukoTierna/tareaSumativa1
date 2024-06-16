@@ -1,1 +1,40 @@
-<p>create-ebook works!</p>
+<form [formGroup]="ebookForm" (ngSubmit)="onSubmit()">
+  <app-text-input
+    formControlName="title"
+    label="Title"
+    placeholder="Enter the title"
+    requiredMessage="Title is required"
+  ></app-text-input>
+
+  <app-text-input
+    formControlName="author"
+    label="Author"
+    placeholder="Enter the author"
+    requiredMessage="Author is required"
+  ></app-text-input>
+
+  <app-text-input
+    formControlName="genre"
+    label="Genre"
+    placeholder="Enter the genre"
+    requiredMessage="Genre is required"
+  ></app-text-input>
+
+  <app-text-input
+    formControlName="format"
+    label="Format"
+    placeholder="Enter the format"
+    requiredMessage="Format is required"
+  ></app-text-input>
+
+  <app-text-input
+    formControlName="price"
+    type="number"
+    label="Price"
+    placeholder="Enter the price"
+    requiredMessage="Price is required and must be a non-negative number"
+  ></app-text-input>
+
+  <button type="submit" class="btn btn-primary">Create Ebook</button>
+  <button type="button" class="btn btn-secondary" (click)="navigateBack()">Regresar</button>
+</form>

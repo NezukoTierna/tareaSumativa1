@@ -17,10 +17,10 @@ export class EbookService {
   }
 
   createEbook(ebook: CreateEbook): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/ebooks`, ebook);
+    return this.http.post(`${this.baseUrl}/ebook`, ebook);
   }
 
   deleteEbook(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/ebooks/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/ebook/${id}`);
   }
 }
