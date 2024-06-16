@@ -20,6 +20,22 @@ export class EbookService {
     return this.http.post(`${this.baseUrl}/ebook`, ebook);
   }
 
+  EditEbook(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/ebook/${id}`);
+  }
+
+  ChangeAvailability(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/ebook/${id}/change-availability`);
+  }
+
+  IncrementStock(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/ebook/${id}/increment-stock`);
+  }
+
+  PurchaseEbook(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/ebook/${id}/purchase`);
+  }
+
   deleteEbook(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/ebook/${id}`);
   }
