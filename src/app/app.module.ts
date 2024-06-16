@@ -9,6 +9,8 @@ import { TextInputComponent } from './_components/text-input/text-input.componen
 import { SelectInputComponent } from './_components/select-input/select-input.component';
 import { EbookListComponent } from './_pages/ebook-list/ebook-list.component';
 import { CreateEbookComponent } from './_pages/create-ebook/create-ebook.component';
+import { EditEbookComponent } from './_pages/edit-ebook/edit-ebook.component';
+import { PurchaseEbookComponent } from './_pages/purchase-ebook/purchase-ebook.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { CreateEbookComponent } from './_pages/create-ebook/create-ebook.compone
     SelectInputComponent,
     EbookListComponent,
     CreateEbookComponent,
+    EditEbookComponent,
+    PurchaseEbookComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,75 @@
+<p>edit-ebook works!</p>
+<form [formGroup]="editEbookForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      id="title"
+      class="form-control"
+      formControlName="title"
+      [ngClass]="{ 'is-invalid': editEbookForm.get('title')?.invalid && editEbookForm.get('title')?.touched }"
+    />
+    <div *ngIf="editEbookForm.get('title')?.invalid && editEbookForm.get('title')?.touched" class="invalid-feedback">
+      Title is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input
+      type="text"
+      id="author"
+      class="form-control"
+      formControlName="author"
+      [ngClass]="{ 'is-invalid': editEbookForm.get('author')?.invalid && editEbookForm.get('author')?.touched }"
+    />
+    <div *ngIf="editEbookForm.get('author')?.invalid && editEbookForm.get('author')?.touched" class="invalid-feedback">
+      Author is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="genre">Genre</label>
+    <input
+      type="text"
+      id="genre"
+      class="form-control"
+      formControlName="genre"
+      [ngClass]="{ 'is-invalid': editEbookForm.get('genre')?.invalid && editEbookForm.get('genre')?.touched }"
+    />
+    <div *ngIf="editEbookForm.get('genre')?.invalid && editEbookForm.get('genre')?.touched" class="invalid-feedback">
+      Genre is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="format">Format</label>
+    <input
+      type="text"
+      id="format"
+      class="form-control"
+      formControlName="format"
+      [ngClass]="{ 'is-invalid': editEbookForm.get('format')?.invalid && editEbookForm.get('format')?.touched }"
+    />
+    <div *ngIf="editEbookForm.get('format')?.invalid && editEbookForm.get('format')?.touched" class="invalid-feedback">
+      Format is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input
+      type="number"
+      id="price"
+      class="form-control"
+      formControlName="price"
+      [ngClass]="{ 'is-invalid': editEbookForm.get('price')?.invalid && editEbookForm.get('price')?.touched }"
+    />
+    <div *ngIf="editEbookForm.get('price')?.invalid && editEbookForm.get('price')?.touched" class="invalid-feedback">
+      Price must be a positive number.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="editEbookForm.invalid">Update Ebook</button>
+  <button type="button" class="btn btn-secondary" (click)="navigateBack()">Regresar</button>
+</form>

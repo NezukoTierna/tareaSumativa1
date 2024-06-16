@@ -26,15 +26,13 @@ export class EbookListComponent implements OnInit {
   }
 
   //esto hace el llamado a la API obteniendo el data, pero ojo, los CORS deben ser habilitados
-  loadEbooks() {
+  loadEbooks(): void {
     this.ebookService.getEbooks().subscribe(
-      (data: Ebook[]) => {
-        this.ebooks = data;
-        this.filteredEbooks = data;
-        this.extractGenres();
+      (ebooks: Ebook[]) => {
+        this.ebooks = ebooks; // Asegúrate de que ebooks sea un arreglo de Ebook
       },
       error => {
-        console.error('Error fetching ebooks', error);
+        console.error('Error loading ebooks', error);
       }
     );
   }
@@ -55,8 +53,8 @@ export class EbookListComponent implements OnInit {
     this.router.navigate(['/create']);
   }
 
-  navigateToEdit(id: number): void {
-    this.router.navigate(['/edit', id]);
+  navigateToEdit(ebook: Ebook) {
+    this.router.navigate(['/edit-ebook', ebook.id]);
   }
 
   deleteEbook(id: number): void {

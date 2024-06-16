@@ -19,7 +19,7 @@
   <ul>
     <li *ngFor="let ebook of filteredEbooks">
       {{ ebook.title }} - {{ ebook.author }} - {{ ebook.genre }}
-      <button type="button" class="btn btn-secondary" (click)="navigateToEdit(ebook.id)">Edit</button>
+      <button type="button" class="btn btn-secondary" (click)="navigateToEdit(ebook)">Edit</button>
       <button type="button" class="btn btn-danger" (click)="deleteEbook(ebook.id)">Delete</button>
     </li>
   </ul>
