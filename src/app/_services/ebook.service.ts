@@ -25,8 +25,8 @@ export class EbookService {
     return this.http.post(`${this.baseUrl}/ebook`, ebook);
   }
 
-  editEbook(ebook: EditEbook): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/ebook/${ebook.id}`);
+  editEbook(ebook: Ebook): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/ebook/${ebook.id}`, ebook);
   }
 
   ChangeAvailability(id: number): Observable<void> {

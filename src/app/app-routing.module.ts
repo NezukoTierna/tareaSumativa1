@@ -8,7 +8,7 @@ const routes: Routes = [
 
   {path: '', component:EbookListComponent},
   {path: 'create', component:CreateEbookComponent},
-  {path: 'edit-ebook/:id', component: EditEbookComponent},
+  {path: 'edit/:id', component: EditEbookComponent},
 
 ];
 

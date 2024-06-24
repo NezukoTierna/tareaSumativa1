@@ -9,11 +9,13 @@ import { EbookService } from 'src/app/_services/ebook.service';
   templateUrl: './edit-ebook.component.html',
   styleUrls: []
 })
-export class EditEbookComponent implements OnInit{
+export class EditEbookComponent implements OnInit {
+  ebookId!: number | undefined;
+  ebook: Ebook | undefined;
+  editEbookForm!: FormGroup;
 
-  editEbookForm!: FormGroup;  // Uso del operador '!' para evitar el error
-  ebookId!: number;           // Uso del operador '!' para evitar el error
-  ebook!: Ebook;              // Uso del operador '!' para evitar el error
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -23,12 +25,19 @@ export class EditEbookComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.ebookId = +this.route.snapshot.paramMap.get('id')!;
+    const id = this.route.snapshot.paramMap.get('id');
+    this.ebookId = id ? +id : undefined;
+    if (!this.ebookId) {
+      // Manejar caso en el que ebookId no se obtenga correctamente
+      console.error('Invalid ebook ID');
+      return;
+    }
+
     this.loadEbook();
     this.initializeForm();
   }
 
-  initializeForm() {
+  initializeForm(): void {
     this.editEbookForm = this.fb.group({
       title: ['', Validators.required],
       author: ['', Validators.required],
@@ -36,28 +45,37 @@ export class EditEbookComponent implements OnInit{
       format: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]]
     });
-
-    this.loadEbook();
   }
 
-  loadEbook() {
-    this.ebookService.getEbookById(this.ebookId).subscribe(
-      (ebook: Ebook) => {
-        this.ebook = ebook;
-        this.editEbookForm.patchValue(ebook);
-      },
-      error => {
-        console.error('Error loading ebook', error);
-      }
-    );
+  loadEbook(): void {
+    if (this.ebookId !== undefined) {
+      this.ebookService.getEbookById(this.ebookId).subscribe(
+        (ebook: Ebook) => {
+          this.ebook = ebook;
+          if (this.editEbookForm) {
+            this.editEbookForm.patchValue(ebook);
+          } else {
+            console.error('editEbookForm is undefined');
+          }
+        },
+        error => {
+          console.error('Error loading ebook', error);
+        }
+      );
+    } else {
+      console.error('ebookId is undefined');
+    }
   }
 
-  onSubmit() {
-    if (this.editEbookForm.valid) {
-      const updatedEbook = { ...this.ebook, ...this.editEbookForm.value };
+
+
+  onSubmit(): void {
+    if (this.editEbookForm.valid && this.ebook) {
+      const updatedEbook: Ebook = { ...this.ebook, ...this.editEbookForm.value };
       this.ebookService.editEbook(updatedEbook).subscribe(
         () => {
-          this.router.navigate(['/']);
+          console.log('Ebook updated successfully');
+          // Aquí puedes redirigir o hacer otras acciones después de la actualización
         },
         error => {
           console.error('Error updating ebook', error);
@@ -66,8 +84,7 @@ export class EditEbookComponent implements OnInit{
     }
   }
 
-  navigateBack() {
+  navigateBack(): void {
     this.router.navigate(['/']);
   }
-
 }
